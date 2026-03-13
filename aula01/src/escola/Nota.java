@@ -1,6 +1,6 @@
 package escola;
 
-public class Aluno {
+public class Nota {
 //max(
 // (${nota_individual}*0.5)   //50% da nota
 // + ${passouNotaCorte} *(API*0.5)          (50%)
@@ -25,10 +25,41 @@ public class Aluno {
     private static double PESO_SUB = 0.15;
     private static double NOTA_CORTE = 5.9;
 
+
+    public static void main(String[] args){
+
+        Nota primeiroAluno = new Nota();
+
+        primeiroAluno.setP1(2.9);
+        primeiroAluno.setE1(6);
+        primeiroAluno.setE2(6);
+        primeiroAluno.setX(1);
+        primeiroAluno.setSUB(10);
+        primeiroAluno.setAPI(6);
+        primeiroAluno.setEXF(10);
+
+
+        System.out.println("Nota individual do aluno: "+primeiroAluno.getNotaIndividual());
+        System.out.println("Nota de corte da disciplina: "+ NOTA_CORTE);
+        System.out.println("Atingiu a nota de corte? (1 - YES / 0 = NO): "+primeiroAluno.getPassouNotaCorte());
+
+
+        System.out.println("Nota da SUB: "+primeiroAluno.getSUB());
+        System.out.println("Nota da API: "+primeiroAluno.getAPI());
+        System.out.println("Nota exame Final: "+ primeiroAluno.getEXF());
+
+        System.out.println("Média Final: "+primeiroAluno.getNotaFinal());
+        primeiroAluno.informarAprovacao();
+
+    }
+
+    // constructor
+    public Nota(){}
+
     // esta função valida se uma determinada nota está entre 0 a 10.
     private static boolean notaInvalida(double nota) {
         if (nota < 0 || nota > 10) {
-            System.out.println("Valor [" + nota + "] inserido é inválido");
+            System.out.println("Valor [" + nota + "] inserido é inválido. Só pode inserir de 0 a 10");
             return true;
         }
         return false;
@@ -75,7 +106,8 @@ public class Aluno {
     }
 
     public void setX(double in) {
-        if (notaInvalida(in)) {
+        if (in < 0 || in > 0.5) {
+            System.out.println("Valor [" + in + "] inserido é inválido. Insira um valor de 0 a 0.5");
             return;
         }
 
@@ -143,6 +175,14 @@ public class Aluno {
 
         return Math.max(notaFinal, this.EXF);
 
+    }
+
+    public void informarAprovacao(){
+    if (this.getNotaFinal() > NOTA_CORTE){
+            System.out.println("APROVADO");
+        } else{
+            System.out.println("REPROVADO. Estude mais");
+        }
     }
 
 }
