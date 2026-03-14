@@ -32,11 +32,26 @@ this.estoque = this.estoque + entradaKg;
     }
 
     public void vender(float entradaKg){
-// TODO
+        float novoEstoque = this.estoque - entradaKg;
+
+        if (novoEstoque < 0){
+            System.out.println("Ta ficando louco? Você nao tem isso tudo de "+ this.nome + ". Voce so tem "+this.estoque+" KG");
+            return;
+        }
+        this.estoque =novoEstoque;
     }
 
     public void perda(float entradaKg){
-// TODO
+        float novoEstoque = this.estoque - entradaKg;
+
+        if (novoEstoque < 0){
+            System.out.println("Impossivel! Nao tem como jogar tudo isso de "+ this.nome + " fora. Voce so tem "+this.estoque+" KG no estoque");
+            return;
+        }
+
+        System.out.println("Parabéns! Você acaba de jogar "+entradaKg+" Kg de "+ this.nome + " na lata de lixo");
+
+        this.estoque =novoEstoque;
     }
 
 
