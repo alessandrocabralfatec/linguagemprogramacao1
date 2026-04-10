@@ -151,9 +151,6 @@ public class Nota {
     }
 
     public double getNotaIndividual() {
-        // TODO perguntar:
-        // tem regra para fazer a SUB, ou pode fazer a gosto para ganhar mais nota? Qual é a regra pra fazer a sub. Posso terminar o semestre com 12?
-
         return (this.P1 * PESO_P1) + (this.E1 * PESO_E1) + (this.E2 * PESO_E2) + (this.X) + (this.SUB * PESO_SUB);
     }
 
