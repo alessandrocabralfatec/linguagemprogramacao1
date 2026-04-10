@@ -48,13 +48,7 @@ classDiagram
     Hortifruti: +abastecer(float entradaKg)
     Hortifruti: +vender(float entradaKg)
     Hortifruti: +perda(float entradaKg)
-   
-
+  
 ```
 
-    private String nome;
-    private float estoqueMaximo;
-    private float estoqueMinimo;
-    private float estoque;
-    private float preco;
-    private String unidade;
+   
