@@ -15,40 +15,149 @@ Ali temos 3 imagens: uma farmácia, uma feira e um salão de beleza.
 
 
 
-```mermaid
-classDiagram
-    Animal <|-- Duck
-    Animal <|-- Fish
-    Animal <|-- Zebra
-    Animal : +int age
-    Animal : +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck{
-      +String beakColor
-      +swim()
-      +quack()
-    }
-    class Fish{
-      -int sizeInFeet
-      -canEat()
-    }
-    class Zebra{
-      +bool is_wild
-      +run()
-    }
-
-```
 
 ```mermaid
 classDiagram
-    Hortifruti : -String nome
-    Hortifruti : -float estoque
-    Hortifruti : -String unidade
-    Hortifruti: +abastecer(float entradaKg)
-    Hortifruti: +vender(float entradaKg)
-    Hortifruti: +perda(float entradaKg)
+title Feira
+    
+    class Hortifruti {
+        -String nome
+        -float estoque
+        -String unidade
+        -float preco
+        
+        +abastecer(float entradaKg) void
+        +vender(float entradaKg) void
+        +perda(float entradaKg) void
+    }
+    
+    class Barraca {
+        -String vendedor
+        -String codigoLicenca
+        -List~Hortifruti~ catalogo
+        
+        +CadastrarProduto(Hortifruti novo) void
+        +ListarProdutos(String nome) List~Hortifruti~
+        +Abrir() void
+        +Fechar() void
+    }
+    
+    class Pedido{
+    
+        -List~PedidoItem~ PedidoItem
+        -float desconto
+        -String nomeCliente
+        
+        +calcularTotal() float
+        +AddItem(PedidoItem item) void
+        +DelItem(PedidoItem item) void
+        +FecharPedido() float
+    }
+    
+    class PedidoItem{
+        -Hortifruti item
+        -float quantidade
+        
+        +calcularTotal() float
+    }
+ 
   
 ```
 
+
+```mermaid
+classDiagram
+title Farmacia
+    
+    class Remedio {
+        -String nome
+        -String agenteAtivo
+        -boolean exigeReceita
+        -int idadeMinimaIndicada
+        -String bula
+        
+        +buscarSimilares(List~Remedio~ lista) List~Remedio~
+        +buscarSintoma(String sintoma) bool
+        +verificarIdadeMinima(int idadePaciente) bool
+        
+    }
+    class Receita {
+        -String paciente
+        -String medico
+        -List~ReceitaItem~ lista
+        
+    
+        +buscarEstoqueSemSimilares(List~Estoque~ estoque) List~Estoque~
+        +buscarEstoqueComSimilares(List~Estoque~ estoque) List~Estoque~
+        +validarPaciente(String nomeDoRG) bool
+    }
+    
+    class ReceitaItem {
+        -boolean atendido
+        -Remedio remedio
+        -String doseReceitada
+        
+        
+    }
+    
+    class Estoque{
+        -Remedio remedio
+        -float quantidade
+        -Lote lote
+
+        +abastecer(float quantidade) void
+        +vender(float quantidade) void
+        +perda(float quantidade) void
+    }
+    
+    class Lote {
+        -String codigo    
+        -Datetime validade
+        -Datetime fabricacao
+        
+        
+    }
    
+```
+
+
+```mermaid
+classDiagram
+title Salao
+    
+    class Servico {
+        -String nome
+        -List~Insumo~ insumos
+        -float horasExecucao
+        -float margemLucro
+        
+        +calcularPrecoCusto()float
+        +calcularPrecoVenda() float
+        +verificarSeTemInsumosParaAtender() bool
+        
+    }
+    
+    class Insumo {
+        -String nome 
+        -String quantidade
+        -Datetime validade
+        -float preco
+        
+        +deveComprarMais() boolean
+        +usar(float quantidade) void
+        +abastecer(float quantidade)
+    }
+    
+    class Cadeira {
+        -long codigo
+        -boolean ocupada
+        -List<Servico> servicosAcessiveis
+        
+        +ocupar() void
+        +desocupar() void
+        +verificarSeAtende(Servico servico) boolean
+        
+    }  
+    
+   
+```
