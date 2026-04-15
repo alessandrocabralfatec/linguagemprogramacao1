@@ -20,6 +20,10 @@ Ali temos 3 imagens: uma farmácia, uma feira e um salão de beleza.
 classDiagram
 title Feira
     
+     Barraca o-- Hortifruti : possui
+     Pedido *-- PedidoItem : contém
+     PedidoItem --> Hortifruti : refere
+    
     class Hortifruti {
         -String nome
         -float estoque
