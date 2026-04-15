@@ -135,7 +135,10 @@ title Farmacia
 ```mermaid
 classDiagram
 title Salao
-    
+
+    Servico o-- Insumo : utiliza
+    Cadeira o-- Servico : permite
+        
     class Servico {
         -String nome
         -List~Insumo~ insumos
