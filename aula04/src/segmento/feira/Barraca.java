@@ -1,4 +1,4 @@
-package aula04.src.segmento;
+package aula04.src.segmento.feira;
 
 import java.util.ArrayList;
 import java.util.List;
