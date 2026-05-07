@@ -20,6 +20,10 @@ Ali temos 3 imagens: uma farmácia, uma feira e um salão de beleza.
 classDiagram
 title Feira
     
+     Barraca o-- Hortifruti : possui
+     Pedido *-- PedidoItem : contém
+     PedidoItem --> Hortifruti : refere
+    
     class Hortifruti {
         -String nome
         -float estoque
@@ -68,6 +72,13 @@ title Feira
 ```mermaid
 classDiagram
 title Farmacia
+
+     Receita o-- Remedio : possui
+     Receita *-- ReceitaItem : contém
+     ReceitaItem --> Remedio : refere
+     Receita ..> EstoqueItem : consulta
+     EstoqueItem *-- Lote : pertence
+
     
     class Remedio {
         -String nome
@@ -87,8 +98,8 @@ title Farmacia
         -List~ReceitaItem~ lista
         
     
-        +buscarEstoqueSemSimilares(List~Estoque~ estoque) List~Estoque~
-        +buscarEstoqueComSimilares(List~Estoque~ estoque) List~Estoque~
+        +buscarEstoqueSemSimilares(List~EstoqueItem~ estoque) List~EstoqueItem~
+        +buscarEstoqueComSimilares(List~EstoqueItem~ estoque) List~EstoqueItem~
         +validarPaciente(String nomeDoRG) bool
     }
     
@@ -100,7 +111,7 @@ title Farmacia
         
     }
     
-    class Estoque{
+    class EstoqueItem{
         -Remedio remedio
         -float quantidade
         -Lote lote
@@ -124,7 +135,10 @@ title Farmacia
 ```mermaid
 classDiagram
 title Salao
-    
+
+    Servico o-- Insumo : utiliza
+    Cadeira o-- Servico : permite
+        
     class Servico {
         -String nome
         -List~Insumo~ insumos
